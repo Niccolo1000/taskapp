@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import './Sidebar.css';
 
 function Sidebar({
@@ -13,9 +13,11 @@ function Sidebar({
   onProjectSelect,
   onBack,
   onPhotoUpload,
+  onAddNewSpot,
   userLocation,
   searchQuery
 }) {
+  const [isCollapsed, setIsCollapsed] = useState(false);
   // Filter spaces based on search query
   const filteredSpaces = useMemo(() => {
     if (!searchQuery) return greenSpaces;
@@ -336,8 +338,24 @@ function Sidebar({
   };
 
   return (
-    <aside className="sidebar">
-      {renderContent()}
+    <aside className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
+      <button
+        className="sidebar-toggle"
+        onClick={() => setIsCollapsed(!isCollapsed)}
+        aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+      >
+        <span className="toggle-icon">{isCollapsed ? '▲' : '▼'}</span>
+        <span className="toggle-text">{isCollapsed ? 'Show Panel' : 'Hide Panel'}</span>
+      </button>
+
+      {!isCollapsed && (
+        <>
+          {renderContent()}
+          <button className="add-spot-btn" onClick={onAddNewSpot}>
+            + Add a Green Spot
+          </button>
+        </>
+      )}
     </aside>
   );
 }

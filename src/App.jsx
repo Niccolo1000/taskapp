@@ -18,6 +18,8 @@ function App() {
   const [communityPhotos, setCommunityPhotos] = useState([]);
   const [mapCenter, setMapCenter] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isAddMode, setIsAddMode] = useState(false);
+  const [customLocation, setCustomLocation] = useState(null);
 
   const stats = getGrowthStats();
 
@@ -91,7 +93,22 @@ function App() {
     setCommunityPhotos(prev => [newPhoto, ...prev]);
     setShowPhotoModal(false);
     setPhotoTarget(null);
+    setCustomLocation(null);
+    setIsAddMode(false);
   }, []);
+
+  const handleAddNewSpot = useCallback(() => {
+    setIsAddMode(true);
+  }, []);
+
+  const handleMapClick = useCallback((location) => {
+    if (isAddMode) {
+      setCustomLocation(location);
+      setPhotoTarget(null);
+      setShowPhotoModal(true);
+      setIsAddMode(false);
+    }
+  }, [isAddMode]);
 
   const handleNavigateToSpace = useCallback((space) => {
     setMapCenter({ lat: space.lat, lng: space.lng });
@@ -143,6 +160,7 @@ function App() {
           onProjectSelect={handleNavigateToProject}
           onBack={handleBackToList}
           onPhotoUpload={handlePhotoUpload}
+          onAddNewSpot={handleAddNewSpot}
           userLocation={userLocation}
           searchQuery={searchQuery}
         />
@@ -157,6 +175,8 @@ function App() {
           onSpaceSelect={handleSpaceSelect}
           onProjectSelect={handleProjectSelect}
           mapCenter={mapCenter}
+          onMapClick={handleMapClick}
+          isAddMode={isAddMode}
         />
       </div>
 
@@ -165,11 +185,14 @@ function App() {
       {showPhotoModal && (
         <PhotoUploadModal
           target={photoTarget}
+          customLocation={customLocation}
           greenSpaces={greenSpaces}
           onSubmit={handlePhotoSubmit}
           onClose={() => {
             setShowPhotoModal(false);
             setPhotoTarget(null);
+            setCustomLocation(null);
+            setIsAddMode(false);
           }}
         />
       )}

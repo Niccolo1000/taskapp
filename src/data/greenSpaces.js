@@ -326,6 +326,84 @@ export const greenSpaces = [
     highlights: ["Natural shoreline", "Sunset views", "Quieter beach", "Mountain views"],
     bestSeasons: ["summer"],
     photos: []
+  },
+  {
+    id: 26,
+    name: "Kitsilano Community Garden",
+    lat: 49.2689,
+    lng: -123.1567,
+    type: "community-garden",
+    size: "0.4 hectares",
+    vibes: ["community", "growing food", "pollinators", "educational", "peaceful"],
+    description: "A thriving community garden in the heart of Kitsilano where neighbors grow vegetables, flowers, and friendships.",
+    highlights: ["Individual garden plots", "Communal herb spiral", "Pollinator corridor", "Tool sharing library"],
+    bestSeasons: ["spring", "summer", "fall"],
+    photos: []
+  },
+  {
+    id: 27,
+    name: "UBC Farm",
+    lat: 49.2508,
+    lng: -123.2381,
+    type: "community-garden",
+    size: "24 hectares",
+    vibes: ["educational", "growing food", "sustainable", "family-friendly", "workshops"],
+    description: "A working farm and learning space at UBC dedicated to sustainable food systems, community engagement, and hands-on education.",
+    highlights: ["Saturday farmers market", "Children's programs", "Indigenous food garden", "Apple orchard", "Seed library"],
+    bestSeasons: ["spring", "summer", "fall"],
+    photos: []
+  },
+  {
+    id: 28,
+    name: "Hastings Folk Garden",
+    lat: 49.2778,
+    lng: -123.0628,
+    type: "community-garden",
+    size: "0.2 hectares",
+    vibes: ["community", "growing food", "grassroots", "cultural", "accessible"],
+    description: "A grassroots community garden in East Vancouver celebrating food growing, cultural exchange, and neighborhood connection.",
+    highlights: ["Diverse plot holders", "Cultural food plants", "Community potlucks", "Seed swaps"],
+    bestSeasons: ["spring", "summer", "fall"],
+    photos: []
+  },
+  {
+    id: 29,
+    name: "Means of Production Garden",
+    lat: 49.2633,
+    lng: -123.0811,
+    type: "community-garden",
+    size: "0.3 hectares",
+    vibes: ["community", "accessible", "educational", "social justice", "growing food"],
+    description: "A community-run garden focused on food justice and accessibility, providing growing space for those who need it most.",
+    highlights: ["Free produce sharing", "Accessible raised beds", "Workshop series", "Community compost"],
+    bestSeasons: ["spring", "summer", "fall"],
+    photos: []
+  },
+  {
+    id: 30,
+    name: "Dunbar Community Garden",
+    lat: 49.2442,
+    lng: -123.1858,
+    type: "community-garden",
+    size: "0.3 hectares",
+    vibes: ["community", "family-friendly", "growing food", "peaceful", "educational"],
+    description: "A charming community garden in Dunbar where families and neighbors cultivate food and community connections.",
+    highlights: ["Children's plots", "Native bee habitat", "Fruit trees", "Annual harvest festival"],
+    bestSeasons: ["spring", "summer", "fall"],
+    photos: []
+  },
+  {
+    id: 31,
+    name: "Grandview Park Community Garden",
+    lat: 49.2753,
+    lng: -123.0694,
+    type: "community-garden",
+    size: "0.15 hectares",
+    vibes: ["community", "urban", "growing food", "accessible", "multicultural"],
+    description: "A vibrant urban garden beside Grandview Park where Commercial Drive's diverse community grows food together.",
+    highlights: ["Rooftop greenhouse", "Multilingual signage", "Community bulletin board", "Accessible pathways"],
+    bestSeasons: ["spring", "summer", "fall"],
+    photos: []
   }
 ];
 

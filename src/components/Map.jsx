@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap, CircleMarker } from 'react-leaflet';
+import React, { useState, useEffect, useRef } from 'react';
+import { MapContainer, TileLayer, Marker, Popup, useMap, CircleMarker, useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './Map.css';
@@ -136,6 +136,18 @@ function MapController({ center }) {
   return null;
 }
 
+// Component to handle map clicks for adding new locations
+function MapClickHandler({ onMapClick, isAddMode }) {
+  useMapEvents({
+    click: (e) => {
+      if (isAddMode && onMapClick) {
+        onMapClick({ lat: e.latlng.lat, lng: e.latlng.lng });
+      }
+    },
+  });
+  return null;
+}
+
 function Map({
   greenSpaces,
   growthProjects,
@@ -145,13 +157,21 @@ function Map({
   communityPhotos,
   onSpaceSelect,
   onProjectSelect,
-  mapCenter
+  mapCenter,
+  onMapClick,
+  isAddMode
 }) {
   // Vancouver center coordinates
   const vancouverCenter = [49.2827, -123.1207];
+  const [legendCollapsed, setLegendCollapsed] = useState(true);
 
   return (
     <div className="map-wrapper">
+      {isAddMode && (
+        <div className="add-mode-banner">
+          Tap anywhere on the map to add a new green spot
+        </div>
+      )}
       <MapContainer
         center={vancouverCenter}
         zoom={12}
@@ -164,6 +184,7 @@ function Map({
         />
 
         <MapController center={mapCenter} />
+        <MapClickHandler onMapClick={onMapClick} isAddMode={isAddMode} />
 
         {/* Green space markers */}
         {greenSpaces.map(space => (
@@ -268,29 +289,47 @@ function Map({
         ))}
       </MapContainer>
 
-      {/* Map legend */}
-      <div className="map-legend">
-        <h4>Legend</h4>
-        <div className="legend-item">
-          <span className="legend-icon">🌳</span>
-          <span>Parks</span>
-        </div>
-        <div className="legend-item">
-          <span className="legend-icon">🌲</span>
-          <span>Forests</span>
-        </div>
-        <div className="legend-item">
-          <span className="legend-icon">🌸</span>
-          <span>Gardens</span>
-        </div>
-        <div className="legend-item">
-          <span className="legend-icon">🏖️</span>
-          <span>Beaches</span>
-        </div>
-        <div className="legend-item growth-legend">
-          <span className="legend-icon">🌱<sup>+</sup></span>
-          <span>New Growth</span>
-        </div>
+      {/* Collapsible Map legend */}
+      <div className={`map-legend ${legendCollapsed ? 'collapsed' : ''}`}>
+        <button
+          className="legend-toggle"
+          onClick={() => setLegendCollapsed(!legendCollapsed)}
+        >
+          {legendCollapsed ? '?' : 'Legend'}
+          <span className="toggle-arrow">{legendCollapsed ? '+' : '-'}</span>
+        </button>
+        {!legendCollapsed && (
+          <div className="legend-content">
+            <div className="legend-item">
+              <span className="legend-icon">🌳</span>
+              <span>Parks</span>
+            </div>
+            <div className="legend-item">
+              <span className="legend-icon">🌲</span>
+              <span>Forests</span>
+            </div>
+            <div className="legend-item">
+              <span className="legend-icon">🌸</span>
+              <span>Gardens</span>
+            </div>
+            <div className="legend-item">
+              <span className="legend-icon">🥕</span>
+              <span>Community Gardens</span>
+            </div>
+            <div className="legend-item">
+              <span className="legend-icon">🏖️</span>
+              <span>Beaches</span>
+            </div>
+            <div className="legend-item">
+              <span className="legend-icon">📷</span>
+              <span>Community Updates</span>
+            </div>
+            <div className="legend-item growth-legend">
+              <span className="legend-icon">🌱<sup>+</sup></span>
+              <span>New Growth Projects</span>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
