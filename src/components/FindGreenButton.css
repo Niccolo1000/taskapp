@@ -1,0 +1,86 @@
+.find-green-btn {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 28px;
+  background: linear-gradient(135deg, var(--green-primary), var(--green-light));
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(45, 106, 79, 0.4);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.find-green-btn:hover:not(:disabled) {
+  transform: translateX(-50%) translateY(-3px);
+  box-shadow: 0 6px 28px rgba(45, 106, 79, 0.5);
+}
+
+.find-green-btn:active:not(:disabled) {
+  transform: translateX(-50%) translateY(-1px);
+}
+
+.find-green-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.9;
+}
+
+.find-green-btn.locating {
+  background: linear-gradient(135deg, var(--water-blue), #6bb3c9);
+}
+
+.btn-icon {
+  font-size: 20px;
+}
+
+.find-green-btn.locating .btn-icon {
+  animation: pulse-icon 1s infinite;
+}
+
+@keyframes pulse-icon {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.btn-text {
+  letter-spacing: 0.3px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .find-green-btn {
+    bottom: 16px;
+    padding: 14px 24px;
+    font-size: 14px;
+  }
+
+  .btn-icon {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 400px) {
+  .find-green-btn {
+    padding: 12px 20px;
+  }
+
+  .btn-text {
+    display: none;
+  }
+
+  .btn-icon {
+    font-size: 24px;
+  }
+}
